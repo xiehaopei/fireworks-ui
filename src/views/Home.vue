@@ -1,9 +1,9 @@
 <!--
  * @Author: Haopei Xie
  * @Date: 2020-10-03 16:01:27
- * @LastEditTime: 2020-10-05 21:33:00
+ * @LastEditTime: 2020-10-05 22:51:21
  * @LastEditors: Haopei Xie
- * @Description: 
+ * @Description: This is the Home page
  * @FilePath: \Pibukae:\vue\fireworks-ui\src\views\Home.vue
 -->
 <template>
@@ -13,8 +13,8 @@
     <h1>烟火UI</h1>
     <h2>抓住转瞬即逝的美感</h2>
     <p class="actions">
-      <a>GitHub</a>
-      <a>开始</a>
+      <a href="https://github.com/xiehaopei/fireworks-ui" target="_blank">GitHub</a>
+      <router-link to="/doc">开始</router-link>
     </p>
   </div>
 </div>
