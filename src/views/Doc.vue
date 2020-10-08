@@ -1,7 +1,7 @@
 <!--
  * @Author: Haopei Xie
  * @Date: 2020-10-03 16:01:34
- * @LastEditTime: 2020-10-06 16:27:24
+ * @LastEditTime: 2020-10-08 10:27:31
  * @LastEditors: Haopei Xie
  * @Descript This is the document page
  * @FilePath: \Pibukae:\vue\fireworks-ui\src\views\Doc.vue
@@ -84,7 +84,7 @@ export default {
   >main {
     flex-grow: 1;
     padding: 16px;
-    background: lightgreen;
+    background: #fff;
   }
 }
 
