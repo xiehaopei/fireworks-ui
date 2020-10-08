@@ -1,7 +1,7 @@
 <!--
  * @Author: Haopei Xie
  * @Date: 2020-10-06 15:32:59
- * @LastEditTime: 2020-10-08 10:59:14
+ * @LastEditTime: 2020-10-08 11:46:52
  * @LastEditors: Haopei Xie
  * @Description: 
  * @FilePath: \Pibukae:\vue\fireworks-ui\src\components\switchPage.vue
@@ -9,7 +9,7 @@
 -->
 <template>
 <div>
-  <Switch :value="state.value" @check="state.value = $event"></Switch>
+  <Switch :value="state.value" @update:value="state.value = $event"></Switch>
 </div>
 </template>
 
