@@ -1,7 +1,7 @@
 <!--
  * @Author: Haopei Xie
  * @Date: 2020-10-09 16:22:56
- * @LastEditTime: 2020-10-09 22:30:36
+ * @LastEditTime: 2020-10-10 22:18:49
  * @LastEditors: Haopei Xie
  * @Description: 
  * @FilePath: \Pibukae:\vue\fireworks-ui\src\lib\Button.vue
@@ -9,7 +9,7 @@
 -->
 <template>
   <button class="fireworks-button" :class="classList">
-    <span class="fireworks-loading" v-if="loading"></span>
+    <span class="fireworks-loadingIndicator" v-if="loading"></span>
     <span>
       <slot></slot>
     </span>
@@ -19,7 +19,6 @@
 <script>
 import { computed } from 'vue';
 export default {
-  inheritAttrs: true,
   props: {
     size: {
       type: String,
@@ -117,10 +116,10 @@ $grey: grey;
 		border-radius: 4px;
 		font-size: 14px;
 	}
-	&.fireworks-size-small {
-		padding: 9px 15px;
-		border-radius: 3px;
-		font-size: 12px;
+	&.fireworks-size-large {
+		padding: 20px 30px;
+		border-radius: 5px;
+		font-size: 16px;
 	}
 	&.fireworks-size-mini {
 		padding: 7px 15px;
@@ -177,11 +176,16 @@ $grey: grey;
 		position: relative;
 		pointer-events: none;
 	}
-	&.fireworks-loading {
+	> .fireworks-loadingIndicator {
+		display: inline-block;
+		margin-right: 4px;
+		border-width: 2px;
+		border-style: solid;
+		border-color: $blue $blue $blue transparent;
+		border-radius: 8px;
 		width: 14px;
 		height: 14px;
-		background-color: red;
-		animation: fireworks-spin 1s infinite;
+		animation: fireworks-spin 1s infinite linear;
 	}
 	@keyframes fireworks-spin {
 		0% {

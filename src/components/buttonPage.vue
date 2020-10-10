@@ -1,7 +1,7 @@
 <!--
  * @Author: Haopei Xie
  * @Date: 2020-10-06 16:29:38
- * @LastEditTime: 2020-10-09 22:16:20
+ * @LastEditTime: 2020-10-10 22:18:00
  * @LastEditors: Haopei Xie
  * @Description: 
  * @FilePath: \Pibukae:\vue\fireworks-ui\src\components\buttonPage.vue
@@ -10,13 +10,9 @@
 <template>
   <div>
     <h1>示例一 size</h1>
+    <Button size="large">大型按钮</Button>
     <Button size="medium">中等按钮</Button>
-    <Button size="small">小型按钮</Button>
     <Button size="mini">迷你按钮</Button>
-    <br />
-    <Button size="medium" theme="button">中等按钮</Button>
-    <Button size="small" theme="link">小型按钮</Button>
-    <Button size="mini" theme="text">迷你按钮</Button>
     <h1>示例二 type</h1>
     <Button type="default">默认按钮</Button>
     <Button type="primary">主要按钮</Button>
@@ -29,7 +25,6 @@
     <Button theme="link">按钮</Button>
     <Button theme="text">按钮</Button>
     <h1>示例四 disabled</h1>
-    <Button>按钮</Button>
     <Button disabled>按钮</Button>
     <h1>示例五 loading</h1>
     <Button loading>加载中</Button>
