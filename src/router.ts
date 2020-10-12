@@ -1,7 +1,7 @@
 /*
  * @Author: Haopei Xie
  * @Date: 2020-10-03 15:36:47
- * @LastEditTime: 2020-10-08 10:34:00
+ * @LastEditTime: 2020-10-11 08:39:30
  * @LastEditors: Haopei Xie
  * @Description:
  * @FilePath: \Pibukae:\vue\fireworks-ui\src\router.ts
