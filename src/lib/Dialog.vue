@@ -1,7 +1,7 @@
 <!--
  * @Author: Haopei Xie
  * @Date: 2020-10-12 21:59:36
- * @LastEditTime: 2020-10-13 09:45:34
+ * @LastEditTime: 2020-10-13 10:56:08
  * @LastEditors: Haopei Xie
  * @Description: 
  * @FilePath: \Pibukae:\vue\fireworks-ui\src\lib\Dialog.vue
@@ -62,7 +62,9 @@ export default {
       }
     };
     const cancel = () => {
-      close();
+      if (props.cancel?.() !== false) {
+        close();
+      }
     };
     const ok = () => {
       if (props.ok?.() !== false) {
