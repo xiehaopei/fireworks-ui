@@ -1,7 +1,7 @@
 <!--
  * @Author: Haopei Xie
  * @Date: 2020-10-12 21:59:36
- * @LastEditTime: 2020-10-12 23:37:27
+ * @LastEditTime: 2020-10-13 09:45:34
  * @LastEditors: Haopei Xie
  * @Description: 
  * @FilePath: \Pibukae:\vue\fireworks-ui\src\lib\Dialog.vue
@@ -9,23 +9,24 @@
 -->
 <template>
   <div v-if="visible">
-    <div class="fireworks-dialog-overlay" @click="onClickOverlay"></div>
-    <div class="fireworks-dialog-wrapper">
-      <div class="fireworks-dialog">
-        <header>
-          标题
-          <span @click="close" class="fireworks-dialog-close"></span>
-        </header>
-        <main>
-          <p>第一行字</p>
-          <p>第二行字</p>
-        </main>
-        <footer>
-          <Button @click="cancel">取消</Button>
-          <Button type="primary" @click="ok">确定</Button>
-        </footer>
+    <Teleport to="body">
+      <div class="fireworks-dialog-overlay" @click="onClickOverlay"></div>
+      <div class="fireworks-dialog-wrapper">
+        <div class="fireworks-dialog">
+          <header>
+            <slot name="title"></slot>
+            <span @click="close" class="fireworks-dialog-close"></span>
+          </header>
+          <main>
+            <slot name="content"></slot>
+          </main>
+          <footer>
+            <Button @click="cancel">取消</Button>
+            <Button type="primary" @click="ok">确定</Button>
+          </footer>
+        </div>
       </div>
-    </div>
+    </Teleport>
   </div>
 </template>
 
@@ -36,6 +37,10 @@ export default {
     visible: {
       type: Boolean,
       default: true,
+    },
+    title: {
+      type: String,
+      default: "标题",
     },
     closeOnClickOverlay: {
       type: Boolean,

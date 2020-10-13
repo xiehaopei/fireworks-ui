@@ -1,7 +1,7 @@
 <!--
  * @Author: Haopei Xie
  * @Date: 2020-10-06 16:29:58
- * @LastEditTime: 2020-10-12 23:37:44
+ * @LastEditTime: 2020-10-13 09:41:17
  * @LastEditors: Haopei Xie
  * @Description: 
  * @FilePath: \Pibukae:\vue\fireworks-ui\src\components\dialogPage.vue
@@ -10,7 +10,14 @@
 <template>
   <div>
     <Button @click="toggleDialog">切换</Button>
-    <Dialog :visible="visible" @update:visible="visible = $event" :ok="fun1" :cancel="fun2"></Dialog>
+    <Dialog :visible="visible" @update:visible="visible = $event" :ok="fun1" :cancel="fun2">
+      <template v-slot:title>
+        <div>你好</div>
+      </template>
+      <template v-slot:content>
+        <div>你好</div>
+      </template>
+    </Dialog>
   </div>
 </template>
 
