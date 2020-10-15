@@ -1,7 +1,7 @@
 <!--
  * @Author: Haopei Xie
  * @Date: 2020-10-14 14:24:12
- * @LastEditTime: 2020-10-15 10:34:56
+ * @LastEditTime: 2020-10-15 10:55:14
  * @LastEditors: Haopei Xie
  * @Description: 
  * @FilePath: \Pibukae:\vue\fireworks-ui\src\lib\Tabs.vue
@@ -16,7 +16,7 @@
         :class="{selected:title===selected}"
         v-for="(title,index) in titles"
         :key="index"
-        :ref="el =>{if(el) navItems[index] = el}"
+        :ref="el =>{if(title===selected) selectedItem = el}"
       >{{title}}</div>
       <div class="fireworks-tabs-nav-indicator" ref="indicator"></div>
     </div>
@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import { onMounted, onUpdated, ref } from "vue";
+import { onMounted, ref, watchEffect } from "vue";
 import Tab from "./Tab.vue";
 export default {
   props: {
@@ -42,19 +42,20 @@ export default {
     },
   },
   setup(props, { emit, slots }) {
-    const navItems = ref<HTMLDivElement[]>([]);
+    const selectedItem = ref<HTMLDivElement>(null);
     const indicator = ref<HTMLDivElement>(null);
     const container = ref<HTMLDivElement>(null);
-    const calculate = () => {
-      const div = navItems.value;
-      const result = div.filter((div) => div.classList.contains("selected"))[0];
-      const { width, left: ItemLeft } = result.getBoundingClientRect();
-      const { left: NavLeft } = container.value.getBoundingClientRect();
-      indicator.value.style.width = width + "px";
-      indicator.value.style.left = NavLeft - ItemLeft + "px";
-    };
-    onMounted(calculate);
-    onUpdated(calculate);
+    onMounted(() => {
+      watchEffect(() => {
+        const {
+          width,
+          left: ItemLeft,
+        } = selectedItem.value.getBoundingClientRect();
+        const { left: NavLeft } = container.value.getBoundingClientRect();
+        indicator.value.style.width = width + "px";
+        indicator.value.style.left = NavLeft - ItemLeft + "px";
+      });
+    });
     const defaults = slots.default();
     const titles = [];
     defaults.forEach((slot) => {
@@ -68,7 +69,7 @@ export default {
       console.log(title);
       emit("update:selected", title);
     };
-    return { defaults, titles, select, navItems, indicator, container };
+    return { defaults, titles, select, selectedItem, indicator, container };
   },
 };
 </script>
