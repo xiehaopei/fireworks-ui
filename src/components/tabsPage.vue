@@ -1,7 +1,7 @@
 <!--
  * @Author: Haopei Xie
  * @Date: 2020-10-06 16:30:24
- * @LastEditTime: 2020-10-14 20:01:13
+ * @LastEditTime: 2020-10-15 09:01:37
  * @LastEditors: Haopei Xie
  * @Description: 
  * @FilePath: \Pibukae:\vue\fireworks-ui\src\components\tabsPage.vue
@@ -24,7 +24,7 @@ export default {
   components: { Tabs, Tab },
   setup() {
     const selected = "导航一";
-    return { selected };
+    return { selected};
   },
 };
 </script>

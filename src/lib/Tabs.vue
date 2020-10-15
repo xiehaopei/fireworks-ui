@@ -1,7 +1,7 @@
 <!--
  * @Author: Haopei Xie
  * @Date: 2020-10-14 14:24:12
- * @LastEditTime: 2020-10-14 19:56:38
+ * @LastEditTime: 2020-10-15 10:34:56
  * @LastEditors: Haopei Xie
  * @Description: 
  * @FilePath: \Pibukae:\vue\fireworks-ui\src\lib\Tabs.vue
@@ -9,23 +9,31 @@
 -->
 <template>
   <div class="fireworks-tabs">
-    <div class="fireworks-tabs-nav">
+    <div class="fireworks-tabs-nav" ref="container">
       <div
         class="fireworks-tabs-nav-item"
         @click="select(title)"
         :class="{selected:title===selected}"
         v-for="(title,index) in titles"
         :key="index"
+        :ref="el =>{if(el) navItems[index] = el}"
       >{{title}}</div>
+      <div class="fireworks-tabs-nav-indicator" ref="indicator"></div>
     </div>
     <div class="fireworks-tabs-contnet">
-      <component class="fireworks-tabs-contnet-item" :is="current"></component>
+      <component
+        class="fireworks-tabs-contnet-item"
+        :class="{selected:component.props.title === selected}"
+        v-for="component in defaults"
+        :key="component"
+        :is="component"
+      ></component>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { computed } from "vue";
+import { onMounted, onUpdated, ref } from "vue";
 import Tab from "./Tab.vue";
 export default {
   props: {
@@ -34,6 +42,19 @@ export default {
     },
   },
   setup(props, { emit, slots }) {
+    const navItems = ref<HTMLDivElement[]>([]);
+    const indicator = ref<HTMLDivElement>(null);
+    const container = ref<HTMLDivElement>(null);
+    const calculate = () => {
+      const div = navItems.value;
+      const result = div.filter((div) => div.classList.contains("selected"))[0];
+      const { width, left: ItemLeft } = result.getBoundingClientRect();
+      const { left: NavLeft } = container.value.getBoundingClientRect();
+      indicator.value.style.width = width + "px";
+      indicator.value.style.left = NavLeft - ItemLeft + "px";
+    };
+    onMounted(calculate);
+    onUpdated(calculate);
     const defaults = slots.default();
     const titles = [];
     defaults.forEach((slot) => {
@@ -43,15 +64,11 @@ export default {
         titles.push(slot.props.title);
       }
     });
-    const current = computed(() => {
-      return defaults.filter((slot) => {
-        return slot.props.title === props.selected;
-      })[0];
-    });
     const select = (title: String) => {
+      console.log(title);
       emit("update:selected", title);
     };
-    return { defaults, titles, current, select };
+    return { defaults, titles, select, navItems, indicator, container };
   },
 };
 </script>
@@ -65,6 +82,7 @@ $border-color: #d9d9d9;
     display: flex;
     color: $color;
     border-bottom: 1px solid $border-color;
+    position: relative;
     &-item {
       padding: 8px 0;
       margin: 0 16px;
@@ -76,9 +94,24 @@ $border-color: #d9d9d9;
         color: $blue;
       }
     }
+    &-indicator {
+      position: absolute;
+      height: 3px;
+      background: $blue;
+      left: 0;
+      bottom: -1px;
+      width: 100px;
+      transition: all 250ms;
+    }
   }
   &-content {
     padding: 8px 0;
+    &-item {
+      display: none;
+      &.selected {
+        display: block;
+      }
+    }
   }
 }
 </style>
