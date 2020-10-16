@@ -1,30 +1,39 @@
 <!--
  * @Author: Haopei Xie
  * @Date: 2020-10-03 21:49:38
- * @LastEditTime: 2020-10-06 16:22:48
+ * @LastEditTime: 2020-10-16 17:40:07
  * @LastEditors: Haopei Xie
  * @Description: 
  * @FilePath: \Pibukae:\vue\fireworks-ui\src\components\Topnav.vue
 -->
 <template>
-<div class="topnav">
-  <div class="logo">LOGO</div>
-  <ul class="menu">
-    <li>菜单1</li>
-    <li>菜单2</li>
-  </ul>
-  <span class="asideButton" @click="toggleAside"></span>
-</div>
+  <div class="topnav">
+    <router-link to="/" class="logo">
+      <svg class="icon">
+        <use xlink:href="#icon-fireworks" />
+      </svg>
+    </router-link>
+    <ul class="menu">
+      <li>菜单1</li>
+      <li>菜单2</li>
+    </ul>
+    <svg v-if="toggleButtonVisible" class="asideButton" @click="toggleAside">
+      <use xlink:href="#icon-menu" />
+    </svg>
+  </div>
 </template>
 
 <script lang="ts">
-import {
-  inject,
-  Ref
-} from "vue";
+import { inject, Ref } from "vue";
 export default {
+  props: {
+    toggleButtonVisible: {
+      type: Boolean,
+      default: false,
+    },
+  },
   setup() {
-    const asideVisible = inject < Ref < boolean >> ("visible");
+    const asideVisible = inject<Ref<boolean>>("visible");
     const toggleAside = () => {
       asideVisible.value = !asideVisible.value;
     };
@@ -36,54 +45,59 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$color: #007974;
 .topnav {
-  background: pink;
   display: flex;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 10;
   justify-content: center;
   align-items: center;
   padding: 16px;
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
-  z-index: 10;
+  color: $color;
 
-  >.logo {
-    max-width: 6em;
+  > .logo {
     margin-right: auto;
+    max-width: 6em;
+    > svg {
+      width: 32px;
+      height: 32px;
+    }
   }
 
-  >.menu {
+  > .menu {
     display: flex;
-    white-space: nowrap;
     flex-wrap: nowrap;
+    white-space: nowrap;
 
-    >li {
+    > li {
       margin: 0 1em;
     }
   }
 
-  >.asideButton {
+  > .asideButton {
     display: none;
-    width: 24px;
-    height: 24px;
-    background-color: red;
     position: absolute;
     left: 16px;
     top: 50%;
+    width: 32px;
+    height: 24px;
+    cursor: pointer;
     transform: translateY(-50%);
   }
 
   @media (max-width: 500px) {
-    >.menu {
+    > .menu {
       display: none;
     }
 
-    >.logo {
+    > .logo {
       margin: 0 auto;
     }
 
-    >.asideButton {
+    > .asideButton {
       display: inline-block;
     }
   }

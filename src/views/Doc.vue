@@ -1,54 +1,51 @@
 <!--
  * @Author: Haopei Xie
  * @Date: 2020-10-03 16:01:34
- * @LastEditTime: 2020-10-08 10:27:31
+ * @LastEditTime: 2020-10-16 17:32:54
  * @LastEditors: Haopei Xie
  * @Descript This is the document page
  * @FilePath: \Pibukae:\vue\fireworks-ui\src\views\Doc.vue
 -->
 <template>
-<div class="layout">
-  <Topnav class="nav" />
-  <div class="content">
-    <aside v-if="asideVisible">
-      <h2>组件列表</h2>
-      <ol>
-        <li>
-          <router-link to="/doc/switch">Switch组件</router-link>
-        </li>
-        <li>
-          <router-link to="/doc/button">Button组件</router-link>
-        </li>
-        <li>
-          <router-link to="/doc/dialog">Dialog组件</router-link>
-        </li>
-        <li>
-          <router-link to="/doc/tabs">Tabs组件</router-link>
-        </li>
-      </ol>
-    </aside>
-    <main>
-      <router-view></router-view>
-    </main>
+  <div class="layout">
+    <Topnav class="nav" toggleButtonVisible/>
+    <div class="content">
+      <aside v-if="asideVisible">
+        <h2>组件列表</h2>
+        <ol>
+          <li>
+            <router-link to="/doc/switch">Switch组件</router-link>
+          </li>
+          <li>
+            <router-link to="/doc/button">Button组件</router-link>
+          </li>
+          <li>
+            <router-link to="/doc/dialog">Dialog组件</router-link>
+          </li>
+          <li>
+            <router-link to="/doc/tabs">Tabs组件</router-link>
+          </li>
+        </ol>
+      </aside>
+      <main>
+        <router-view></router-view>
+      </main>
+    </div>
   </div>
-</div>
 </template>
 
 <script lang="ts">
-import {
-  inject,
-  Ref
-} from 'vue';
-import Topnav from '../components/Topnav.vue';
+import { inject, Ref } from "vue";
+import Topnav from "../components/Topnav.vue";
 export default {
   components: {
     Topnav,
   },
   setup() {
-    const asideVisible = inject < Ref < boolean >> ('visible')
+    const asideVisible = inject<Ref<boolean>>("visible");
     return {
-      asideVisible
-    }
+      asideVisible,
+    };
   },
 };
 </script>
@@ -59,11 +56,11 @@ export default {
   flex-direction: column;
   height: 100vh;
 
-  >.nav {
+  > .nav {
     flex-shrink: 0;
   }
 
-  >.content {
+  > .content {
     flex-grow: 1;
     padding-top: 60px;
     padding-left: 156px;
@@ -77,11 +74,11 @@ export default {
 .content {
   display: flex;
 
-  >aside {
+  > aside {
     flex-shrink: 0;
   }
 
-  >main {
+  > main {
     flex-grow: 1;
     padding: 16px;
     background: #fff;
@@ -98,12 +95,12 @@ aside {
   padding-top: 70px;
   height: 100%;
 
-  >h2 {
+  > h2 {
     margin-bottom: 4px;
   }
 
-  >ol {
-    >li {
+  > ol {
+    > li {
       padding: 4px 0;
     }
   }
