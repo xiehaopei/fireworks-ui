@@ -1,7 +1,7 @@
 <!--
  * @Author: Haopei Xie
  * @Date: 2020-10-14 14:24:12
- * @LastEditTime: 2020-10-15 10:55:14
+ * @LastEditTime: 2020-10-16 11:16:01
  * @LastEditors: Haopei Xie
  * @Description: 
  * @FilePath: \Pibukae:\vue\fireworks-ui\src\lib\Tabs.vue
@@ -12,28 +12,22 @@
     <div class="fireworks-tabs-nav" ref="container">
       <div
         class="fireworks-tabs-nav-item"
-        @click="select(title)"
         :class="{selected:title===selected}"
         v-for="(title,index) in titles"
         :key="index"
+        @click="select(title)"
         :ref="el =>{if(title===selected) selectedItem = el}"
       >{{title}}</div>
       <div class="fireworks-tabs-nav-indicator" ref="indicator"></div>
     </div>
     <div class="fireworks-tabs-contnet">
-      <component
-        class="fireworks-tabs-contnet-item"
-        :class="{selected:component.props.title === selected}"
-        v-for="component in defaults"
-        :key="component"
-        :is="component"
-      ></component>
+      <component class="fireworks-tabs-contnet-item" :is="current" :key="current.props.title"></component>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { onMounted, ref, watchEffect } from "vue";
+import { computed, onMounted, ref, watchEffect } from "vue";
 import Tab from "./Tab.vue";
 export default {
   props: {
@@ -53,7 +47,7 @@ export default {
         } = selectedItem.value.getBoundingClientRect();
         const { left: NavLeft } = container.value.getBoundingClientRect();
         indicator.value.style.width = width + "px";
-        indicator.value.style.left = NavLeft - ItemLeft + "px";
+        indicator.value.style.left = (ItemLeft - NavLeft) + "px";
       });
     });
     const defaults = slots.default();
@@ -69,7 +63,18 @@ export default {
       console.log(title);
       emit("update:selected", title);
     };
-    return { defaults, titles, select, selectedItem, indicator, container };
+    const current = computed(() => {
+      return defaults.find((tag) => tag.props.title === props.selected);
+    });
+    return {
+      defaults,
+      titles,
+      select,
+      selectedItem,
+      indicator,
+      container,
+      current,
+    };
   },
 };
 </script>
@@ -107,12 +112,6 @@ $border-color: #d9d9d9;
   }
   &-content {
     padding: 8px 0;
-    &-item {
-      display: none;
-      &.selected {
-        display: block;
-      }
-    }
   }
 }
 </style>
