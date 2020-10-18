@@ -1,7 +1,7 @@
 <!--
  * @Author: Haopei Xie
  * @Date: 2020-10-03 21:49:38
- * @LastEditTime: 2020-10-16 17:40:07
+ * @LastEditTime: 2020-10-18 15:10:11
  * @LastEditors: Haopei Xie
  * @Description: 
  * @FilePath: \Pibukae:\vue\fireworks-ui\src\components\Topnav.vue
@@ -14,8 +14,7 @@
       </svg>
     </router-link>
     <ul class="menu">
-      <li>菜单1</li>
-      <li>菜单2</li>
+      <router-link to="/doc">文档</router-link>
     </ul>
     <svg v-if="toggleButtonVisible" class="asideButton" @click="toggleAside">
       <use xlink:href="#icon-menu" />
@@ -51,7 +50,7 @@ $color: #007974;
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 10;
+  z-index: 20;
   justify-content: center;
   align-items: center;
   padding: 16px;
