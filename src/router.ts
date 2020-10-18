@@ -1,7 +1,7 @@
 /*
  * @Author: Haopei Xie
  * @Date: 2020-10-03 15:36:47
- * @LastEditTime: 2020-10-18 17:42:01
+ * @LastEditTime: 2020-10-18 23:16:36
  * @LastEditors: Haopei Xie
  * @Description:
  * @FilePath: \Pibukae:\vue\fireworks-ui\src\router.ts
@@ -25,6 +25,10 @@ const router = createRouter({
       component: () => import("./views/Doc.vue"),
       children: [
         {
+          path: "/doc",
+          redirect: "/doc/introduce",
+        },
+        {
           path: "introduce",
           component: renderMarkdown("introduce"),
         },
@@ -38,17 +42,17 @@ const router = createRouter({
         },
         {
           path: "switch",
-          component: () => import("./components/switchPage.vue"),
+          component: () => import("./components/SwitchPage.vue"),
         },
         {
           path: "button",
-          component: () => import("./components/buttonPage.vue"),
+          component: () => import("./components/ButtonPage.vue"),
         },
         {
           path: "dialog",
-          component: () => import("./components/dialogPage.vue"),
+          component: () => import("./components/DialogPage.vue"),
         },
-        { path: "tabs", component: () => import("./components/tabsPage.vue") },
+        { path: "tabs", component: () => import("./components/TabsPage.vue") },
       ],
     },
   ],
