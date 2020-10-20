@@ -1,10 +1,10 @@
 <!--
  * @Author: Haopei Xie
  * @Date: 2020-10-06 15:32:59
- * @LastEditTime: 2020-10-18 23:50:55
+ * @LastEditTime: 2020-10-20 23:53:26
  * @LastEditors: Haopei Xie
  * @Description: 
- * @FilePath: \Pibukae:\vue\fireworks-ui\src\components\switchPage.vue
+ * @FilePath: \Pibukae:\vue\fireworks-ui\src\components\SwitchPage.vue
  * @
 -->
 <template>
@@ -16,8 +16,8 @@
 </template>
 
 <script lang="ts">
-import Switch1Demo from "./Switch1.demo.vue";
-import Switch2Demo from "./Switch2.demo.vue";
+import Switch1Demo from "../demo/Switch1.demo.vue";
+import Switch2Demo from "../demo/Switch2.demo.vue";
 import Demo from "./Demo.vue";
 export default {
   components: {
