@@ -1,7 +1,7 @@
 <!--
  * @Author: Haopei Xie
  * @Date: 2020-10-14 14:24:12
- * @LastEditTime: 2020-10-16 11:16:01
+ * @LastEditTime: 2020-10-22 22:32:14
  * @LastEditors: Haopei Xie
  * @Description: 
  * @FilePath: \Pibukae:\vue\fireworks-ui\src\lib\Tabs.vue
@@ -27,8 +27,8 @@
 </template>
 
 <script lang="ts">
-import { computed, onMounted, ref, watchEffect } from "vue";
-import Tab from "./Tab.vue";
+import { computed, onMounted, onUpdated, ref } from "vue";
+import TabItem from "./TabItem.vue";
 export default {
   props: {
     selected: {
@@ -39,28 +39,31 @@ export default {
     const selectedItem = ref<HTMLDivElement>(null);
     const indicator = ref<HTMLDivElement>(null);
     const container = ref<HTMLDivElement>(null);
+    const updatePosition = ()=>{
+      const {
+        width,
+        left: ItemLeft,
+      } = selectedItem.value.getBoundingClientRect();
+      const { left: NavLeft } = container.value.getBoundingClientRect();
+      indicator.value.style.width = width + "px";
+      indicator.value.style.left = ItemLeft - NavLeft + "px";
+    }
     onMounted(() => {
-      watchEffect(() => {
-        const {
-          width,
-          left: ItemLeft,
-        } = selectedItem.value.getBoundingClientRect();
-        const { left: NavLeft } = container.value.getBoundingClientRect();
-        indicator.value.style.width = width + "px";
-        indicator.value.style.left = (ItemLeft - NavLeft) + "px";
-      });
+      updatePosition()
+    });
+    onUpdated(() => {
+      updatePosition()
     });
     const defaults = slots.default();
     const titles = [];
     defaults.forEach((slot) => {
-      if (slot.type !== Tab) {
-        throw new Error("Tabs子标签必须为Tab");
+      if (slot.type !== TabItem) {
+        throw new Error("Tabs子标签必须为TabItem");
       } else {
         titles.push(slot.props.title);
       }
     });
     const select = (title: String) => {
-      console.log(title);
       emit("update:selected", title);
     };
     const current = computed(() => {

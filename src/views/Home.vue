@@ -1,7 +1,7 @@
 <!--
  * @Author: Haopei Xie
  * @Date: 2020-10-03 16:01:27
- * @LastEditTime: 2020-10-18 23:28:53
+ * @LastEditTime: 2020-10-22 21:27:03
  * @LastEditors: Haopei Xie
  * @Description: This is the Home page
  * @FilePath: \Pibukae:\vue\fireworks-ui\src\views\Home.vue
@@ -11,7 +11,7 @@
     <div class="home-page">
       <Topnav />
       <div class="banner">
-        <h1>烟火UI</h1>
+        <h1>烟花UI</h1>
         <h2>抓住转瞬即逝的美感</h2>
         <p class="actions">
           <a href="https://github.com/xiehaopei/fireworks-ui" target="_blank">GitHub</a>
