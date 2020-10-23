@@ -15,8 +15,7 @@
 </template>
 
 <script lang="ts">
-import Dialog from "../lib/Dialog.vue";
-import Button from "../lib/Button.vue";
+import { Dialog, Button } from "../lib/index";
 import { ref } from "vue";
 export default {
   components: { Dialog, Button },
@@ -26,11 +25,11 @@ export default {
       visible.value = !visible.value;
     };
     const fun1 = () => {
-      console.log(1);
+      console.log("You had clicked the button");
       return false;
     };
     const fun2 = () => {
-      console.log(2);
+      console.log("You had clicked the button");
     };
     return { visible, toggleDialog, fun1, fun2 };
   },
