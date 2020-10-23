@@ -1,7 +1,7 @@
 /*
  * @Author: Haopei Xie
  * @Date: 2020-10-03 15:36:47
- * @LastEditTime: 2020-10-18 23:16:36
+ * @LastEditTime: 2020-10-23 15:52:05
  * @LastEditors: Haopei Xie
  * @Description:
  * @FilePath: \Pibukae:\vue\fireworks-ui\src\router.ts
@@ -11,9 +11,13 @@ import { h } from "vue";
 import { createWebHistory, createRouter } from "vue-router";
 import markdown from "./components/markdown.vue";
 
+import introduce from "./markdown/introduce.md";
+import start from "./markdown/start.md";
+import install from "./markdown/install.md";
+
 const history = createWebHistory();
-const renderMarkdown = (filename) => {
-  return h(markdown, { path: `../markdown/${filename}.md`, key: filename });
+const renderMarkdown = (String) => {
+  return h(markdown, { content: String, key: String });
 };
 const router = createRouter({
   history: history,
@@ -30,15 +34,15 @@ const router = createRouter({
         },
         {
           path: "introduce",
-          component: renderMarkdown("introduce"),
+          component: renderMarkdown(introduce),
         },
         {
           path: "start",
-          component: renderMarkdown("start"),
+          component: renderMarkdown(start),
         },
         {
           path: "install",
-          component: renderMarkdown("install"),
+          component: renderMarkdown(install),
         },
         {
           path: "switch",
