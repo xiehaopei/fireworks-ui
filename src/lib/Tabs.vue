@@ -1,7 +1,7 @@
 <!--
  * @Author: Haopei Xie
  * @Date: 2020-10-14 14:24:12
- * @LastEditTime: 2020-10-22 22:32:14
+ * @LastEditTime: 2020-10-23 21:07:42
  * @LastEditors: Haopei Xie
  * @Description: 
  * @FilePath: \Pibukae:\vue\fireworks-ui\src\lib\Tabs.vue
@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import { computed, onMounted, onUpdated, ref } from "vue";
+import { computed, onMounted, onUpdated, ref, watchEffect } from "vue";
 import TabItem from "./TabItem.vue";
 export default {
   props: {
@@ -39,20 +39,19 @@ export default {
     const selectedItem = ref<HTMLDivElement>(null);
     const indicator = ref<HTMLDivElement>(null);
     const container = ref<HTMLDivElement>(null);
-    const updatePosition = ()=>{
-      const {
-        width,
-        left: ItemLeft,
-      } = selectedItem.value.getBoundingClientRect();
-      const { left: NavLeft } = container.value.getBoundingClientRect();
-      indicator.value.style.width = width + "px";
-      indicator.value.style.left = ItemLeft - NavLeft + "px";
-    }
     onMounted(() => {
-      updatePosition()
-    });
-    onUpdated(() => {
-      updatePosition()
+      watchEffect(
+        () => {
+          const {
+            width,
+            left: ItemLeft,
+          } = selectedItem.value.getBoundingClientRect();
+          const { left: NavLeft } = container.value.getBoundingClientRect();
+          indicator.value.style.width = width + "px";
+          indicator.value.style.left = ItemLeft - NavLeft + "px";
+        },
+        { flush: "post" }
+      );
     });
     const defaults = slots.default();
     const titles = [];
