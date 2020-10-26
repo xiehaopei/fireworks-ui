@@ -1,7 +1,7 @@
 /*
  * @Author: Haopei Xie
  * @Date: 2020-10-03 15:36:47
- * @LastEditTime: 2020-10-23 15:52:05
+ * @LastEditTime: 2020-10-26 15:05:06
  * @LastEditors: Haopei Xie
  * @Description:
  * @FilePath: \Pibukae:\vue\fireworks-ui\src\router.ts
@@ -57,6 +57,10 @@ const router = createRouter({
           component: () => import("./components/DialogPage.vue"),
         },
         { path: "tabs", component: () => import("./components/TabsPage.vue") },
+        {
+          path: "loading",
+          component: () => import("./components/LoadingPage.vue"),
+        },
       ],
     },
   ],
